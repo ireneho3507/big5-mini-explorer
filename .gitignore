@@ -1,3 +1,7 @@
 .venv
 __pycache__/
 .ipynb_checkpoints/
+
+# 原始資料不入 git（保留 codebook 等文字檔）
+data/raw/**/*.csv
+data/raw/**/*.zip
