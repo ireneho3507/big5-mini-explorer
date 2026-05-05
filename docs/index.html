@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>big5-mini-explorer — Big Five 迷你探索</title>
+  <style>
+    :root {
+      --accent: #4C72B0;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { font-size: 17px; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC",
+                   "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      margin: 0 0 0.25rem 0;
+      font-size: 2.25rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    header p.tagline {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      color: var(--text);
+      border-left: 4px solid var(--accent);
+      padding-left: 0.6rem;
+      margin: 0 0 0.9rem 0;
+    }
+
+    section p, section li {
+      font-size: 1rem;
+    }
+
+    ol, ul {
+      padding-left: 1.4rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    figure {
+      margin: 1.4rem 0;
+      padding: 0;
+    }
+
+    figure img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card);
+    }
+
+    figure figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(76, 114, 176, 0.3);
+    }
+
+    a:hover {
+      border-bottom-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <main>
+
+    <header>
+      <h1>big5-mini-explorer</h1>
+      <p class="tagline">用 pandas 與 matplotlib 對 Big Five 五大人格資料做迷你探索分析的小專案。</p>
+    </header>
+
+    <section id="goal">
+      <h2>Goal</h2>
+      <p>
+        在 Open Psychometrics Project 公開的 Big Five 線上問卷資料（n ≈ 19,700）上做迷你探索，回答兩個問題：
+        <strong>(1)</strong> 五因子分數在男女之間是否存在可觀察的差異？
+        <strong>(2)</strong> 五因子分數是否隨年齡呈現有意義的趨勢，並符合人格心理學的成熟原則（maturity principle）？
+      </p>
+    </section>
+
+    <section id="procedure">
+      <h2>Procedure</h2>
+      <ol>
+        <li>從 Open Psychometrics Project 下載 50-item IPIP Big Five 問卷的原始檔（tab-separated，2012 年蒐集，共 19,719 筆）。</li>
+        <li>以 Python 寫資料清理模組 <code>load_clean_data()</code>，過濾不合理年齡（13–80 歲）與未填性別的回應，剃除約 0.6%。</li>
+        <li>依 IPIP 標準鍵把反向計分題（如「我不太說話」對應 Extraversion）反向後，把每位受試者的 50 題濃縮成五個因子的<strong>平均</strong>分數（範圍 1–5），便於跨因子比較。</li>
+        <li>用 violin plot 比較男女兩個次群體在五因子上的分布形狀、中位數與四分位數，呈現性別差異。</li>
+        <li>把每一歲（age）的因子平均畫成趨勢線並加上 95% 信賴區間（僅納入 n ≥ 30 的年齡），觀察年齡梯度。</li>
+      </ol>
+    </section>
+
+    <section id="outcome">
+      <h2>Outcome</h2>
+
+      <figure>
+        <img src="figure1_descriptive.png" alt="Five-factor scores by gender, violin plot">
+        <figcaption>
+          <strong>Figure 1.</strong> 女性在 <em>Agreeableness</em>（中位 4.1 vs. 男性 3.7）與 <em>Neuroticism</em>（3.2 vs. 2.9）的中位數明顯高於男性，與既有跨文化研究方向一致；<em>Extraversion</em>、<em>Conscientiousness</em>、<em>Openness</em> 三因子的性別差異則較小。
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="figure2_relational.png" alt="Five-factor scores across age, line plot with 95% CI">
+        <figcaption>
+          <strong>Figure 2.</strong> <em>Conscientiousness</em> 與 <em>Agreeableness</em> 隨年齡上升、<em>Neuroticism</em> 略微下降，方向上呼應 Roberts 等人提出的成熟原則；高齡段樣本較少，信賴區間隨之變寬。
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="caveats">
+      <h2>Caveats</h2>
+      <ul>
+        <li><strong>樣本代表性</strong>：受試者為網路自願填答者，並非機率抽樣；2012 年的 demographics 偏向年輕、英語使用者，無法直接推論一般人口。</li>
+        <li><strong>方法侷限</strong>：五因子分數源自 50-item IPIP 自陳量表，可能受社會期許偏誤、回答風格與缺漏值影響；本分析未做題目層級的信效度檢驗。</li>
+        <li><strong>橫斷推論</strong>：年齡趨勢來自橫斷資料，不能直接推論為個體一生的發展軌跡，仍可能反映世代效應（不同年代成長者的人格基線本就不同）。</li>
+      </ul>
+    </section>
+
+    <section id="repo">
+      <h2>Repository</h2>
+      <p>
+        原始碼與 notebook 均開源於 GitHub：
+        <a href="https://github.com/ireneho3507/big5-mini-explorer" target="_blank" rel="noopener">github.com/ireneho3507/big5-mini-explorer</a>
+      </p>
+    </section>
+
+    <section id="author">
+      <h2>Author</h2>
+      <p>
+        Irene Ho（114825002）<br>
+        中央大學認知神經科學所<br>
+        2026-05-05
+      </p>
+    </section>
+
+  </main>
+</body>
+</html>
