@@ -44,7 +44,7 @@ source .venv/bin/activate         # macOS / Linux
 pip install -r requirements.txt
 
 # 4. 下載資料（檔案不入 git）
-#    從 https://openpsychometrics.org/_rawdata/ 下載 BIG5.zip
+#    從 https://openpsychometrics.org/_rawdata/BIG5.zip 下載 BIG5.zip
 #    解壓後將 data.csv 與 codebook.txt 放到 data/raw/BIG5/
 mkdir -p data/raw/BIG5
 
@@ -96,7 +96,7 @@ big5-mini-explorer/
 
 ## Data source & License
 
-- **資料來源**：[Open Psychometrics Project](https://openpsychometrics.org/_rawdata/) — Big Five Personality Test Data (c. 2012)
+- **資料來源**：[Open Psychometrics Project](https://openpsychometrics.org/_rawdata/BIG5.zip) — Big Five Personality Test Data (c. 2012)
 - **樣本**：19,719 名線上受試者；含 race / age / engnat / gender / hand / source / country 七項背景變項
 - **量表**：50-item IPIP Big Five 問卷，5 點 Likert（1 = Disagree、3 = Neutral、5 = Agree、0 = 未作答）
 - **使用條款**：依 Open Psychometrics 公告，資料供學術與非商業研究使用；使用時建議引註其網站。
@@ -104,4 +104,4 @@ big5-mini-explorer/
 
 ## Author
 
-Irene Ho（114825002）｜中央大學認知神經科學所｜Spring 2026 NS5116 修課學生
+何官臻 ｜ 114825002｜中央大學認知神經科學所
